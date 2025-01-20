@@ -1,0 +1,53 @@
+Oque é?
+como funciona?
+para que serve?
+
+-Requisitos:
+ Python 3.13.1 instalado.
+Criar e iniciar um venv no diretório principal com python -m venv venv / venv\Scripts\activate
+instalar principais bibliotecas (Flask, SQLAlchemy, Flask-Login): pip install flask sqlalchemy
+DbBrowser para visualizar banco de dados SQLite
+
+-Estrutura do projeto:
+GERENCIADORDEMETAS/
+│
+├── app/
+│   ├── __init__.py        # Inicializa o aplicativo Flask e configura o SQLAlchemy
+│   ├── models.py          # Define os modelos de dados
+│   ├── routes.py          # Define as rotas da aplicação
+│   ├── config.py          # Configurações da aplicação
+│   ├── database.db        # Arquivo SQLite gerado automaticamente pelo SQLAlchemy
+│   ├── venv/              # Ambiente virtual (não será versionado no Git)
+│   └── run.py                 # Arquivo principal para executar o servidor
+│
+├── templates/
+│   ├──GerenciadorDeMetas.HTML
+│
+└── Documentação.txt       # Dependências do projeto
+
+
+-Lógica e estruturação do projeto:
+Criei o app.py (Criação do app utilizando Flask) import do Flask, inicialização do app, defini a rota principal (@app.route("/")) e (app.run(debug=True)) inicia o servidor local.
+1° Teste - Executar o servidor com o python app.py no terminal.
+resposta esperada: Running on http://127.0.0.1:5000
+na web page: ''Bem vindo! este é o (My Way) meu gerenciador de metas!''
+-Criando e configurando o arquivo config.py (O arquivo config.py será responsável por armazenar configurações como a conexão com o banco de dados e a secret key.)
+ em config.py importamos o módulo os que fornece funcionalidades para interagir com o sistema operacional qualquer seja ele, definido o BASE_DIR que é o caminho absoluto para o sistema identificar onde se encontra o app.py e config.py e que as configurações sejam aplicadas na aplicação Flask e é usado para criar o caminho do banco de dados.
+ utilizando SQLAlchemy (ORM que mapeia tabelas de db para objetos Python)
+ sqlite:/// é o formato padrão de configurar o SQLite no SQLAlchemy.
+ O Objetivo é a conexão do projeto com um banco de dados SQLite.
+ Gerar a secret Key (Objetivo: Garante a segurança da aplicação ao criar uma chave única e imprevisível.)
+-Criei e configurei o arquivo models.py, o modelo do banco de dados que definira as tabelas que armazenarão dados e metas dos usuários.
+ em models.py a princípio defini as tabelas User e Meta com seus respectivos dados como id, username, password, email, metas para User e id, titulo, descricao, prazo, prioridade, status e user_id para Metas.
+  -db.Model defini que toda classe que for mapeada no banco de dados deve herdar de db.Model (modelo usado pelo sqlalchemy)
+-Criei o __init__.py para iniciar a aplicação. (responsável por iniciar o SQLAlchemy e Flask)
+ em __init__.py ligamos os arquivos config, models e app, com a função create_app() inicialzamos o Flask aplicando as configurações de config.py, a Config é carregada e vincula o banco de dados ao aplicativo (SQLAlchemy).
+-Criando as rotas (routes.py)
+ em routes.py importamos uma render_template de flask, e inicializamos a aplicação usando as configurações definidas anteriormente. definimos a rota em @app.route('/') que retorna a render_template HTML.
+-Criado a pasta templetates/
+ Templates é onde estará localizado GERENCIADORDEMETAS.html (template para o aplicativo)
+-Criado o arquivo run.py
+ arquivo que inicializa o Flask e, com contexto de aplicação (app.app_context() executa db.create_all() para criar as tabelas definidas no modelo.)
+
+
+
