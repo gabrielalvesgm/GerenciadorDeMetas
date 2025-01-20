@@ -1,6 +1,5 @@
-Oque é?
-como funciona?
-para que serve?
+Oque é? Esta é uma aplicação que simula um gerenciador de metas, onde é possível ter uma conta de usuário própria, com email, usuário e senha, gerênciar suas metas pesoais, adicionar, remover e customizar.
+como funciona? a aplicação é feita com a interação a API, com criação de Usuários, Gestão de metas, persistência de dados, utilizando métodos CRUD juntamente com Python.
 
 -Requisitos:
  Python 3.13.1 instalado.
